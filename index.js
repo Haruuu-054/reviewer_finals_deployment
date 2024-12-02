@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: false }));
 // API Routes
 
 // Get all members
-app.get('https://reviewer-finals-deployment.onrender.com/api/members', (req, res) => {
+app.get('/api/members', (req, res) => {
     connection.query('SELECT * FROM userdata', (err, rows) => {
         if (err) throw err;
         res.json(rows);
@@ -49,7 +49,7 @@ app.get('https://reviewer-finals-deployment.onrender.com/api/members', (req, res
 });
 
 // Get a member by ID
-app.get('https://reviewer-finals-deployment.onrender.com/api/members/:id', (req, res) => {
+app.get('/api/members/:id', (req, res) => {
     const id = req.params.id;
     connection.query(`SELECT * FROM userdata WHERE id='${id}'`, (err, rows) => {
         if (err) throw err;
@@ -62,7 +62,7 @@ app.get('https://reviewer-finals-deployment.onrender.com/api/members/:id', (req,
 });
 
 // Add a new member
-app.post('https://reviewer-finals-deployment.onrender.com/api/members', (req, res) => {
+app.post('/api/members', (req, res) => {
     const { first_name, last_name, email, gender } = req.body;
     connection.query(
         `INSERT INTO userdata (first_name, last_name, email, gender) VALUES ('${first_name}', '${last_name}', '${email}', '${gender}')`,
@@ -86,7 +86,7 @@ app.put('/api/members', (req, res) => {
 });
 
 // Delete a member
-app.delete('https://reviewer-finals-deployment.onrender.com/api/members', (req, res) => {
+app.delete('/api/members', (req, res) => {
     const { id } = req.body;
     connection.query(`DELETE FROM userdata WHERE id='${id}'`, (err) => {
         if (err) throw err;
