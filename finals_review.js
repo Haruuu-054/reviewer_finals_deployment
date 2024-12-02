@@ -60,7 +60,7 @@ submit.addEventListener('click', ()=>{
         'first_name': first_name, 'last_name': last_name, 'email': email, 'gender': gender
     };
 
-    fetch('http://localhost:5000/api/members', {
+    fetch('https://reviewer-finals-deployment.onrender.com/api/members', {
         method: 'POST',
         body: JSON.stringify(formData),
         headers:{
@@ -75,7 +75,7 @@ function deleteMember(id) {
     
     if (userConfirmed) {
         let formData = { id };
-        fetch('http://localhost:5000/api/members', {
+        fetch('https://reviewer-finals-deployment.onrender.com/api/members', {
             method: 'DELETE',
             body: JSON.stringify(formData),
             headers: {
@@ -99,7 +99,7 @@ function deleteMember(id) {
 
 //PUT FETCH (UPDATE)
 function updateMember(id) {
-    fetch(`http://localhost:5000/api/members/${id}`)
+    fetch(`https://reviewer-finals-deployment.onrender.com/api/members${id}`)
         .then(response => response.json())
         .then(data => {
             document.querySelector('#first_name').value = data[0].first_name;
@@ -122,7 +122,7 @@ updateBTN.addEventListener('click', () => {
     let formData = { first_name, last_name, email, gender, id };
 
     // Sending the update request
-    fetch('http://localhost:5000/api/members', {
+    fetch('https://reviewer-finals-deployment.onrender.com/api/members', {
         method: 'PUT',
         body: JSON.stringify(formData),
         headers: {
