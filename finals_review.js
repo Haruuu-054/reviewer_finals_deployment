@@ -27,11 +27,10 @@ function getEmployees() {
             data.forEach(element => {
                 html += 
 `                <tr>
-                    <td>${element.id}</td>
                     <td>${element.first_name}</td>
-                    <td>${element.last_name}</td> 
-                     <td>${element.email}</td>
-                     <td>${element.gender}</td>
+                    <td>${element.last_name}</td>
+                    <td>${element.email}</td>
+                    <td>${element.gender}</td>
                     <td><a href = "javascript:void(0)" onClick = "deleteMember(${element.id})"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
   <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1M.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8z"/>
 </svg></a>
@@ -51,26 +50,48 @@ function getEmployees() {
 }
 
 
-//POST FETCH (INSERT)
+// POST FETCH (INSERT)
+submit.addEventListener('click', (event) => {
+    event.preventDefault(); // Prevent the form from submitting normally
 
-submit.addEventListener('click', ()=>{
-    let first_name = document.querySelector('#first_name').value
-    let last_name = document.querySelector('#last_name').value
-    let email = document.querySelector('#email').value
-    let gender = document.querySelector('#gender').value
+    let first_name = document.querySelector('#first_name').value;
+    let last_name = document.querySelector('#last_name').value;
+    let email = document.querySelector('#email').value;
+    let gender = document.querySelector('#gender').value;
 
     let formData = {
-        'first_name': first_name, 'last_name': last_name, 'email': email, 'gender': gender
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        gender: gender
     };
 
+    // Sending the POST request with the form data
     fetch('https://reviewer-finals-deployment.onrender.com/api/members', {
         method: 'POST',
         body: JSON.stringify(formData),
-        headers:{
+        headers: {
             'Content-Type': 'application/json',
         }
     })
-})
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to submit data');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Member added successfully:', data);
+        alert('Member added successfully!');
+        // Optionally, call getEmployees() to reload the table with new data
+        getEmployees();
+    })
+    .catch(error => {
+        console.error('Error submitting form:', error);
+        alert('An error occurred while submitting the form.');
+    });
+});
+
 
 //DELETE FETCH
 function deleteMember(id) {
