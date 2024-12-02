@@ -9,7 +9,9 @@ const moment = require('moment'); // Import Moment.js for timestamps
 const app = express();
 
 // Enable CORS for all routes
-app.use(cors());
+app.use(cors({
+  origin: 'https://haruuu-054.github.io', // Replace with your frontend's URL
+}));
 
 // Set the port
 const PORT = process.env.PORT || 5000;
