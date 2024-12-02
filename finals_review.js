@@ -99,7 +99,7 @@ function deleteMember(id) {
 
 //PUT FETCH (UPDATE)
 function updateMember(id) {
-    fetch(`https://reviewer-finals-deployment.onrender.com/api/members${id}`)
+    fetch(`https://reviewer-finals-deployment.onrender.com/api/members/${id}`)
         .then(response => response.json())
         .then(data => {
             document.querySelector('#first_name').value = data[0].first_name;
