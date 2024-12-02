@@ -15,7 +15,7 @@ function getEmployees() {
     let html = ''; // Initialize an empty string to store the HTML for table rows
 
     // Fetch data from the API
-    fetch('https://reviewer-finals-deployment.onrender.com', { mode: 'cors' })
+    fetch('https://reviewer-finals-deployment.onrender.com/api/members', { mode: 'cors' })
         .then(response => {
             console.log(response); // Log the raw response for debugging purposes
             return response.json(); // Parse the JSON data from the response
